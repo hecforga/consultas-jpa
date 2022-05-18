@@ -4,6 +4,7 @@ import com.nunsys.consultas.service.PostQueryService;
 import com.nunsys.consultas.service.PostService;
 import com.nunsys.consultas.service.dto.PostCriteria;
 import com.nunsys.consultas.service.dto.PostDTO;
+import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
 import com.nunsys.consultas.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -19,7 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -95,12 +96,19 @@ public class PostResource {
      * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of posts in body.
      */
-    @GetMapping("/posts")
+    @GetMapping(value = "/posts", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PostDTO>> getAllPosts(PostCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Posts by criteria: {}", criteria);
         Page<PostDTO> page = postQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping(value = "/posts", produces = "application/combo+json")
+    public ResponseEntity<List<PostForComboDTO>> getAllPostsForCombo() {
+        log.debug("REST request to get Posts for combo");
+        List<PostForComboDTO> result = postService.findAllForComboDto();
+        return ResponseEntity.ok().body(result);
     }
 
     /**

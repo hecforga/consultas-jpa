@@ -1,6 +1,8 @@
 package com.nunsys.consultas.service;
 
 import com.nunsys.consultas.service.dto.PostDTO;
+import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,8 @@ public interface PostService {
      * @return the list of entities.
      */
     Page<PostDTO> findAll(Pageable pageable);
+
+    List<PostForComboDTO> findAllForComboDto();
 
     /**
      * Get the "id" post.

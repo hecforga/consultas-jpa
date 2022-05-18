@@ -4,7 +4,10 @@ import com.nunsys.consultas.domain.Post;
 import com.nunsys.consultas.repository.PostRepository;
 import com.nunsys.consultas.service.PostService;
 import com.nunsys.consultas.service.dto.PostDTO;
+import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
 import com.nunsys.consultas.service.mapper.PostMapper;
+import com.nunsys.consultas.service.mapper.custom.PostForComboMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +28,12 @@ public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
 
-    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
+    private final PostForComboMapper postForComboMapper;
+
+    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper, PostForComboMapper postForComboMapper) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
+        this.postForComboMapper = postForComboMapper;
     }
 
     @Override
@@ -43,6 +49,11 @@ public class PostServiceImpl implements PostService {
     public Page<PostDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Posts");
         return postRepository.findAll(pageable).map(postMapper::toDto);
+    }
+
+    @Override
+    public List<PostForComboDTO> findAllForComboDto() {
+        return postForComboMapper.toDto(postRepository.findAll());
     }
 
     @Override
