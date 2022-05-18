@@ -1,5 +1,6 @@
 package com.nunsys.consultas.service;
 
+import com.nunsys.consultas.domain.custom.IPostForCombo;
 import com.nunsys.consultas.service.dto.PostDTO;
 import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
 import java.util.List;
@@ -28,6 +29,8 @@ public interface PostService {
     Page<PostDTO> findAll(Pageable pageable);
 
     List<PostForComboDTO> findAllForComboDto();
+
+    List<IPostForCombo> findAllForComboInterface();
 
     /**
      * Get the "id" post.

@@ -1,6 +1,7 @@
 package com.nunsys.consultas.service.impl;
 
 import com.nunsys.consultas.domain.Post;
+import com.nunsys.consultas.domain.custom.IPostForCombo;
 import com.nunsys.consultas.repository.PostRepository;
 import com.nunsys.consultas.service.PostService;
 import com.nunsys.consultas.service.dto.PostDTO;
@@ -54,6 +55,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostForComboDTO> findAllForComboDto() {
         return postForComboMapper.toDto(postRepository.findAll());
+    }
+
+    @Override
+    public List<IPostForCombo> findAllForComboInterface() {
+        return postRepository.findAllBy();
     }
 
     @Override
