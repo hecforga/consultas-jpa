@@ -47,6 +47,9 @@ public class CacheConfiguration {
             createCache(cm, com.nunsys.consultas.domain.User.class.getName());
             createCache(cm, com.nunsys.consultas.domain.Authority.class.getName());
             createCache(cm, com.nunsys.consultas.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.nunsys.consultas.domain.Post.class.getName());
+            createCache(cm, com.nunsys.consultas.domain.Post.class.getName() + ".comments");
+            createCache(cm, com.nunsys.consultas.domain.Comment.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,46 @@
+{
+  "name": "Comment",
+  "fields": [
+    {
+      "fieldName": "year",
+      "fieldType": "Integer",
+      "javadoc": "year",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "approved",
+      "fieldType": "Boolean",
+      "javadoc": "approved",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "content",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "3500"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "comments",
+      "relationshipValidateRules": "required",
+      "relationshipName": "post",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220518141016",
+  "javadoc": "The Comment entity.\\n@author hector.fornes",
+  "entityTableName": "comment",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

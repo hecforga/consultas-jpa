@@ -1,0 +1,39 @@
+{
+  "name": "Post",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "title",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "content",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "3500"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "comments"
+    }
+  ],
+  "changelogDate": "20220518140916",
+  "javadoc": "The Post entity.\\n@author hector.fornes",
+  "entityTableName": "post",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

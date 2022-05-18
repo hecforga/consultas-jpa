@@ -1,0 +1,80 @@
+/**
+ * CONSTANTES DE CONFIGURACIÓN
+ * ===========================
+ */
+
+STR_LONGITUD_CORTA = 20
+STR_LONGITUD_MEDIA = 100
+STR_LONGITUD_LARGA = 250
+STR_LONGITUD_MAXIMA = 3500
+
+
+/**
+ * ENUMS
+ * ==========
+ */
+
+
+/**
+ * ENTITIES
+ * =========
+ */
+
+/**
+ * The Post entity.
+ * @author hector.fornes
+ */
+entity Post {
+    /** title */
+    title String required maxlength(STR_LONGITUD_MEDIA)
+    /** content */
+    content String required maxlength(STR_LONGITUD_MAXIMA)
+}
+
+/**
+ * The Comment entity.
+ * @author hector.fornes
+ */
+entity Comment {
+    /** year */
+    year Integer required
+    /** approved */
+    approved Boolean required
+    /** content */
+    content String required maxlength(STR_LONGITUD_MAXIMA)
+}
+
+/**
+ * RELATIONSHIPS
+ * ==========
+ */
+
+/**
+ * One to many relationships
+ */
+relationship OneToMany {
+    Post{comments} to Comment{post required}
+}
+
+/**
+ * Many to one relationships
+ */
+
+/**
+ * One to one relationships.
+ */
+
+/**
+ * Many to many relationships.
+ */
+
+
+/**
+ * OPTIONS
+ * ========
+ */
+
+dto * with mapstruct
+service * with serviceImpl
+filter *
+paginate * with pagination
