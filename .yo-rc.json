@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.nunsys.consultas",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "consultas",
+    "packageName": "com.nunsys.consultas",
+    "packageFolder": "com/nunsys/consultas",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YmZkMzE4MGY0NjVhMTg5Yjg4MzU1NmUwNzk4Y2UzMmZjZGViNDcwYWRmNzI2MzFjNmYzZWRmNTQ2NmU5NTliODIwNzkzMmM0ZWYzZDVhMTIzZGIxNjcwZjc3NWRjY2ZiNDNlZGIxNmQwZjQzMWQyM2I4OTc4MDFjNzFiMzg1OWU=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1652877752322,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "es",
+    "languages": ["es", "en"],
+    "blueprints": [],
+    "skipClient": true,
+    "prettierJava": true
+  }
+}
