@@ -1,11 +1,11 @@
 package com.nunsys.consultas.web.rest;
 
 import com.nunsys.consultas.domain.custom.IPostForBigCombo;
-import com.nunsys.consultas.domain.custom.IPostForCombo;
 import com.nunsys.consultas.service.PostQueryService;
 import com.nunsys.consultas.service.PostService;
 import com.nunsys.consultas.service.dto.PostCriteria;
 import com.nunsys.consultas.service.dto.PostDTO;
+import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
 import com.nunsys.consultas.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -106,9 +106,9 @@ public class PostResource {
     }
 
     @GetMapping(value = "/posts", produces = "application/combo+json")
-    public ResponseEntity<List<IPostForCombo>> getAllPostsForCombo() {
+    public ResponseEntity<List<PostForComboDTO>> getAllPostsForCombo() {
         log.debug("REST request to get Posts for combo");
-        List<IPostForCombo> result = postService.findAllForComboInterface();
+        List<PostForComboDTO> result = postService.findAllForComboDto();
         return ResponseEntity.ok().body(result);
     }
 

@@ -8,9 +8,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface PostForComboMapper extends EntityMapper<PostForComboDTO, Post> {
-    @Mapping(target = "summary", expression = "java(post.getTitle() + \" - \" + post.getContent().substring(0, 8) + \"...\")")
-    PostForComboDTO toDto(Post post);
-
     @Mapping(target = "title", ignore = true)
     @Mapping(target = "content", ignore = true)
     @Mapping(target = "comments", ignore = true)

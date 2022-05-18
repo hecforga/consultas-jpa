@@ -103,6 +103,13 @@ public class Post implements Serializable {
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    public String getSummary() {
+        return getTitle() + " - " + getContent().substring(0, 8) + "...";
+    }
+
+    public int getCommentsCount() {
+        return getComments().size();
+    }
 
     @Override
     public boolean equals(Object o) {

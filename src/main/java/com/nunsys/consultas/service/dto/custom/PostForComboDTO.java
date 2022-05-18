@@ -5,6 +5,8 @@ public class PostForComboDTO {
 
     private String summary;
 
+    private Integer commentsCount;
+
     public Long getId() {
         return id;
     }
@@ -19,5 +21,13 @@ public class PostForComboDTO {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public Integer getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(Integer commentsCount) {
+        this.commentsCount = commentsCount;
     }
 }
