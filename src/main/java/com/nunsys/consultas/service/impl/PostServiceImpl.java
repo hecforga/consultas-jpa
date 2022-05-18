@@ -1,6 +1,7 @@
 package com.nunsys.consultas.service.impl;
 
 import com.nunsys.consultas.domain.Post;
+import com.nunsys.consultas.domain.custom.IPostForBigCombo;
 import com.nunsys.consultas.domain.custom.IPostForCombo;
 import com.nunsys.consultas.repository.PostRepository;
 import com.nunsys.consultas.service.PostService;
@@ -59,7 +60,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<IPostForCombo> findAllForComboInterface() {
-        return postRepository.findAllBy();
+        return postRepository.findAllBy(IPostForCombo.class);
+    }
+
+    @Override
+    public List<IPostForBigCombo> findAllForBigComboInterface() {
+        return postRepository.findAllBy(IPostForBigCombo.class);
     }
 
     @Override

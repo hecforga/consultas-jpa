@@ -1,5 +1,6 @@
 package com.nunsys.consultas.web.rest;
 
+import com.nunsys.consultas.domain.custom.IPostForBigCombo;
 import com.nunsys.consultas.domain.custom.IPostForCombo;
 import com.nunsys.consultas.service.PostQueryService;
 import com.nunsys.consultas.service.PostService;
@@ -108,6 +109,13 @@ public class PostResource {
     public ResponseEntity<List<IPostForCombo>> getAllPostsForCombo() {
         log.debug("REST request to get Posts for combo");
         List<IPostForCombo> result = postService.findAllForComboInterface();
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping(value = "/posts", produces = "application/big-combo+json")
+    public ResponseEntity<List<IPostForBigCombo>> getAllPostsForBigCombo() {
+        log.debug("REST request to get Posts for big combo");
+        List<IPostForBigCombo> result = postService.findAllForBigComboInterface();
         return ResponseEntity.ok().body(result);
     }
 

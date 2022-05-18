@@ -1,5 +1,6 @@
 package com.nunsys.consultas.service;
 
+import com.nunsys.consultas.domain.custom.IPostForBigCombo;
 import com.nunsys.consultas.domain.custom.IPostForCombo;
 import com.nunsys.consultas.service.dto.PostDTO;
 import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
@@ -31,6 +32,8 @@ public interface PostService {
     List<PostForComboDTO> findAllForComboDto();
 
     List<IPostForCombo> findAllForComboInterface();
+
+    List<IPostForBigCombo> findAllForBigComboInterface();
 
     /**
      * Get the "id" post.
