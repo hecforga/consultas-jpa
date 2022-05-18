@@ -115,6 +115,12 @@ public class CommentResource {
         return ResponseEntity.ok().body(commentQueryService.countByCriteria(criteria));
     }
 
+    @GetMapping("/comments/count-by-year")
+    public ResponseEntity<List<Object[]>> countCommentsByYear() {
+        log.debug("REST request to count Comments by year");
+        return ResponseEntity.ok().body(commentService.countByYearAsListOfObjects());
+    }
+
     /**
      * {@code GET  /comments/:id} : get the "id" comment.
      *

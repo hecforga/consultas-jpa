@@ -5,6 +5,8 @@ import com.nunsys.consultas.repository.CommentRepository;
 import com.nunsys.consultas.service.CommentService;
 import com.nunsys.consultas.service.dto.CommentDTO;
 import com.nunsys.consultas.service.mapper.CommentMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,5 +58,10 @@ public class CommentServiceImpl implements CommentService {
     public void delete(Long id) {
         log.debug("Request to delete Comment : {}", id);
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Object[]> countByYearAsListOfObjects() {
+        return commentRepository.countTotalCommentsByYearAsListOfObjects();
     }
 }
