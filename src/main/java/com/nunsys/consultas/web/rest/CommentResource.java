@@ -1,10 +1,10 @@
 package com.nunsys.consultas.web.rest;
 
+import com.nunsys.consultas.domain.custom.ICommentCount;
 import com.nunsys.consultas.service.CommentQueryService;
 import com.nunsys.consultas.service.CommentService;
 import com.nunsys.consultas.service.dto.CommentCriteria;
 import com.nunsys.consultas.service.dto.CommentDTO;
-import com.nunsys.consultas.service.dto.custom.CommentCountDTO;
 import com.nunsys.consultas.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -117,9 +117,9 @@ public class CommentResource {
     }
 
     @GetMapping("/comments/count-by-year")
-    public ResponseEntity<List<CommentCountDTO>> countCommentsByYear() {
+    public ResponseEntity<List<ICommentCount>> countCommentsByYear() {
         log.debug("REST request to count Comments by year");
-        return ResponseEntity.ok().body(commentService.countByYearAsListOfDtos());
+        return ResponseEntity.ok().body(commentService.countTotalCommentsByYearAsListOfInterfaces());
     }
 
     /**

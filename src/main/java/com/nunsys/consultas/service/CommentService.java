@@ -1,5 +1,6 @@
 package com.nunsys.consultas.service;
 
+import com.nunsys.consultas.domain.custom.ICommentCount;
 import com.nunsys.consultas.service.dto.CommentDTO;
 import com.nunsys.consultas.service.dto.custom.CommentCountDTO;
 import java.util.List;
@@ -45,4 +46,6 @@ public interface CommentService {
     List<Object[]> countByYearAsListOfObjects();
 
     List<CommentCountDTO> countByYearAsListOfDtos();
+
+    List<ICommentCount> countTotalCommentsByYearAsListOfInterfaces();
 }

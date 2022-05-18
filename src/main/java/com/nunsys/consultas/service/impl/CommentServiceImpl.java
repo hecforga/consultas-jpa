@@ -1,6 +1,7 @@
 package com.nunsys.consultas.service.impl;
 
 import com.nunsys.consultas.domain.Comment;
+import com.nunsys.consultas.domain.custom.ICommentCount;
 import com.nunsys.consultas.repository.CommentRepository;
 import com.nunsys.consultas.service.CommentService;
 import com.nunsys.consultas.service.dto.CommentDTO;
@@ -68,5 +69,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentCountDTO> countByYearAsListOfDtos() {
         return commentRepository.countTotalCommentsByYearAsListOfDtos();
+    }
+
+    @Override
+    public List<ICommentCount> countTotalCommentsByYearAsListOfInterfaces() {
+        return commentRepository.countTotalCommentsByYearAsListOfInterfaces();
     }
 }
