@@ -4,8 +4,8 @@ import com.nunsys.consultas.domain.Comment;
 import com.nunsys.consultas.repository.CommentRepository;
 import com.nunsys.consultas.service.CommentService;
 import com.nunsys.consultas.service.dto.CommentDTO;
+import com.nunsys.consultas.service.dto.custom.CommentCountDTO;
 import com.nunsys.consultas.service.mapper.CommentMapper;
-
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -63,5 +63,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Object[]> countByYearAsListOfObjects() {
         return commentRepository.countTotalCommentsByYearAsListOfObjects();
+    }
+
+    @Override
+    public List<CommentCountDTO> countByYearAsListOfDtos() {
+        return commentRepository.countTotalCommentsByYearAsListOfDtos();
     }
 }

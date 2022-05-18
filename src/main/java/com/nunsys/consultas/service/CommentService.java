@@ -1,7 +1,7 @@
 package com.nunsys.consultas.service;
 
 import com.nunsys.consultas.service.dto.CommentDTO;
-
+import com.nunsys.consultas.service.dto.custom.CommentCountDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -43,4 +43,6 @@ public interface CommentService {
     void delete(Long id);
 
     List<Object[]> countByYearAsListOfObjects();
+
+    List<CommentCountDTO> countByYearAsListOfDtos();
 }
