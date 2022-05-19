@@ -22,4 +22,65 @@
         </createView>
     </changeSet>
 
+    <changeSet id="20220518180000-2" author="hector.fornes">
+        <createProcedure>
+            CREATE OR replace FUNCTION f_post_with_comments_count(
+                year_from int,
+                year_to int,
+                page int,
+                size int
+            )
+            RETURNS TABLE (
+                id bigint,
+                summary text,
+                comments_count bigint
+            ) AS
+            $func$
+            BEGIN
+                if (page = -1 OR size = -1) then
+                    return query SELECT
+                        p.id,
+                        CONCAT(p.title, ' - ', SUBSTRING(p.content, 0, 8), '...') AS summary,
+                        COUNT(c.id) AS comments_count
+                    FROM post p
+                    INNER JOIN comment c ON c.post_id = p.id
+                    WHERE c.year &gt;= year_from AND c.year &lt;= year_to
+                    GROUP BY 1, 2;
+                else
+                    return query SELECT
+                        p.id,
+                        CONCAT(p.title, ' - ', SUBSTRING(p.content, 0, 8), '...') AS summary,
+                        COUNT(c.id) AS comments_count
+                    FROM post p
+                    INNER JOIN comment c ON c.post_id = p.id
+                    WHERE c.year &gt;= year_from AND c.year &lt;= year_to
+                    GROUP BY 1, 2
+                    LIMIT size OFFSET page * size;
+                end if;
+            END
+            $func$ language plpgsql
+        </createProcedure>
+
+        <createProcedure>
+            CREATE OR replace FUNCTION f_count_post_with_comments_count(
+                year_from int,
+                year_to int
+            )
+            RETURNS TABLE (
+                total bigint
+            ) AS
+            $func$
+            BEGIN
+            return query SELECT COUNT(*) AS total FROM (
+                    SELECT COUNT(*)
+                    FROM post p
+                    INNER JOIN comment c ON c.post_id = p.id
+                    WHERE c.year &gt;= year_from AND c.year &lt;= year_to
+                    GROUP BY p.id
+                ) as subquery;
+            END
+            $func$ LANGUAGE plpgsql
+        </createProcedure>
+    </changeSet>
+
 </databaseChangeLog>

@@ -1,10 +1,10 @@
 package com.nunsys.consultas.web.rest;
 
 import com.nunsys.consultas.domain.custom.IPostForBigCombo;
-import com.nunsys.consultas.domain.custom.PostWithCommentsCount;
+import com.nunsys.consultas.domain.custom.PostWithCommentsCountFunction;
 import com.nunsys.consultas.service.PostQueryService;
 import com.nunsys.consultas.service.PostService;
-import com.nunsys.consultas.service.PostWithCommentsCountQueryService;
+import com.nunsys.consultas.service.PostWithCommentsCountFunctionQueryService;
 import com.nunsys.consultas.service.dto.PostCriteria;
 import com.nunsys.consultas.service.dto.PostDTO;
 import com.nunsys.consultas.web.rest.errors.BadRequestAlertException;
@@ -44,16 +44,16 @@ public class PostResource {
 
     private final PostQueryService postQueryService;
 
-    private final PostWithCommentsCountQueryService postWithCommentsCountQueryService;
+    private final PostWithCommentsCountFunctionQueryService postWithCommentsCountFunctionQueryService;
 
     public PostResource(
         PostService postService,
         PostQueryService postQueryService,
-        PostWithCommentsCountQueryService postWithCommentsCountQueryService
+        PostWithCommentsCountFunctionQueryService postWithCommentsCountFunctionQueryService
     ) {
         this.postService = postService;
         this.postQueryService = postQueryService;
-        this.postWithCommentsCountQueryService = postWithCommentsCountQueryService;
+        this.postWithCommentsCountFunctionQueryService = postWithCommentsCountFunctionQueryService;
     }
 
     /**
@@ -114,9 +114,13 @@ public class PostResource {
     }
 
     @GetMapping(value = "/posts", produces = "application/combo+json")
-    public ResponseEntity<List<PostWithCommentsCount>> getAllPostsWithCommentsCount(PostCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Posts with comments count by criteria: {}", criteria);
-        Page<PostWithCommentsCount> page = postWithCommentsCountQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<PostWithCommentsCountFunction>> getAllPostsWithCommentsCount(
+        @RequestParam Integer yearFrom,
+        @RequestParam Integer yearTo,
+        Pageable pageable
+    ) {
+        log.debug("REST request to get Posts with comments count by yearFrom and yearTo: {} - {}", yearFrom, yearTo);
+        Page<PostWithCommentsCountFunction> page = postWithCommentsCountFunctionQueryService.findByYear(yearFrom, yearTo, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
