@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+
+    <changeSet id="20220518180000-1" author="hector.fornes">
+        <createView viewName="vw_post_with_comments_count">
+            SELECT
+                post.id,
+                CONCAT(post.title, ' - ', SUBSTRING(post.content, 0, 8), '...') as summary,
+                COUNT(comment.id) as comments_count
+            FROM
+                post
+                    LEFT JOIN
+                comment
+                ON
+                    post.id = comment.post_id
+            GROUP BY
+                post.id
+        </createView>
+    </changeSet>
+
+</databaseChangeLog>

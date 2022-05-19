@@ -1,11 +1,12 @@
 package com.nunsys.consultas.web.rest;
 
 import com.nunsys.consultas.domain.custom.IPostForBigCombo;
+import com.nunsys.consultas.domain.custom.PostWithCommentsCount;
 import com.nunsys.consultas.service.PostQueryService;
 import com.nunsys.consultas.service.PostService;
+import com.nunsys.consultas.service.PostWithCommentsCountQueryService;
 import com.nunsys.consultas.service.dto.PostCriteria;
 import com.nunsys.consultas.service.dto.PostDTO;
-import com.nunsys.consultas.service.dto.custom.PostForComboDTO;
 import com.nunsys.consultas.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -43,9 +44,16 @@ public class PostResource {
 
     private final PostQueryService postQueryService;
 
-    public PostResource(PostService postService, PostQueryService postQueryService) {
+    private final PostWithCommentsCountQueryService postWithCommentsCountQueryService;
+
+    public PostResource(
+        PostService postService,
+        PostQueryService postQueryService,
+        PostWithCommentsCountQueryService postWithCommentsCountQueryService
+    ) {
         this.postService = postService;
         this.postQueryService = postQueryService;
+        this.postWithCommentsCountQueryService = postWithCommentsCountQueryService;
     }
 
     /**
@@ -106,10 +114,11 @@ public class PostResource {
     }
 
     @GetMapping(value = "/posts", produces = "application/combo+json")
-    public ResponseEntity<List<PostForComboDTO>> getAllPostsForCombo() {
-        log.debug("REST request to get Posts for combo");
-        List<PostForComboDTO> result = postService.findAllForComboDto();
-        return ResponseEntity.ok().body(result);
+    public ResponseEntity<List<PostWithCommentsCount>> getAllPostsWithCommentsCount(PostCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Posts with comments count by criteria: {}", criteria);
+        Page<PostWithCommentsCount> page = postWithCommentsCountQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping(value = "/posts", produces = "application/big-combo+json")
