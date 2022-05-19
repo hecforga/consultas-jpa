@@ -11,6 +11,7 @@ import com.nunsys.consultas.service.mapper.PostMapper;
 import com.nunsys.consultas.service.mapper.custom.PostForComboMapper;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,11 @@ public class PostServiceImpl implements PostService {
     public Page<PostDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Posts");
         return postRepository.findAll(pageable).map(postMapper::toDto);
+    }
+
+    @Override
+    public List<PostDTO> findAllByTitleLike(Set<String> titleSet) {
+        return postMapper.toDto(postRepository.findAllByTitleLike(titleSet));
     }
 
     @Override

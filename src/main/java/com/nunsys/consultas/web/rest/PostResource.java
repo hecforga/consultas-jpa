@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -129,6 +130,13 @@ public class PostResource {
     public ResponseEntity<List<IPostForBigCombo>> getAllPostsForBigCombo() {
         log.debug("REST request to get Posts for big combo");
         List<IPostForBigCombo> result = postService.findAllForBigComboInterface();
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping(value = "/posts", produces = "application/title-like+json")
+    public ResponseEntity<List<PostDTO>> getAllPostsByTitleLike(@RequestParam Set<String> titles) {
+        log.debug("REST request to get Posts by title like");
+        List<PostDTO> result = postService.findAllByTitleLike(titles);
         return ResponseEntity.ok().body(result);
     }
 
